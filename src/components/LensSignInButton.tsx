@@ -1,10 +1,10 @@
 import { SignInWithLens, Tokens } from "@lens-protocol/widgets-react";
-import { useSigner, useProvider } from "wagmi";
+import { useSigner } from "wagmi";
 import { Profile, Theme } from "@lens-protocol/widgets-react/dist/types";
 import { ethers } from "ethers";
 
-const SignInButton = () => {
-  const {data: signer} = useSigner({ chainId: 137 })
+const LensSignInButton = () => {
+  const { data: signer } = useSigner({ chainId: 137 })
   if (!signer) return null
 
   const onSignIn = async (tokens: Tokens, profile: Profile) => {
@@ -15,10 +15,10 @@ const SignInButton = () => {
   return (
     <SignInWithLens
       onSignIn={onSignIn}
-      provider={new ethers.providers.Web3Provider(signer.provider as any)}
+      provider={signer.provider as ethers.providers.Web3Provider}
       theme={Theme.lavender}
     />
   )
 };
 
-export default SignInButton;
+export default LensSignInButton;
