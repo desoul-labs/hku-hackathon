@@ -3,7 +3,15 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  transpilePackages: ['@lens-protocol'],
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
+  transpilePackages: ["@lens-protocol"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
