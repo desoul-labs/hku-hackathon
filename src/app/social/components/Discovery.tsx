@@ -12,7 +12,7 @@ export default function Discovery() {
   const { data, loading, hasMore, next } = useExplorePublications({
     publicationTypes: [PublicationTypes.Post],
     sortCriteria: PublicationSortCriteria.Latest,
-    limit: 50,
+    limit: 10,
   });
 
   return (
@@ -33,13 +33,10 @@ export default function Discovery() {
           <div className="mx-auto max-w-7xl py-3 sm:px-3 lg:px-8">
             <InfiniteScroll
               pageStart={0}
-              loadMore={() => {
-                console.log("loading more: ");
-                next();
-              }}
+              loadMore={next}
               hasMore={hasMore}
-              threshold={500}
               loader={<Loading isCenter />}
+              useWindow={false}
             >
               <Feeds posts={data as PostFragment[]} />
             </InfiniteScroll>

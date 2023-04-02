@@ -1,15 +1,25 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import Providers from "../providers/Providers";
 import Discovery from "./components/Discovery";
 import Friends from "./components/Friends";
-import Navigation, { TAB } from "./components/Navigation";
+import Navigation, { HASH, TAB } from "./components/Navigation";
 
 function Social() {
   const [activeTab, setActiveTab] = useState(TAB.DISCOVERY);
 
   const onPressTab = useCallback((tab: TAB) => setActiveTab(tab), []);
+
+  useLayoutEffect(() => {
+    const hash = window.location.hash;
+
+    if (hash === HASH.FRIENDS) {
+      setActiveTab(TAB.FRIENDS);
+    } else if (hash === HASH.DISCOVERY) {
+      setActiveTab(TAB.DISCOVERY);
+    }
+  }, []);
 
   return (
     <div className="h-screen w-screen">

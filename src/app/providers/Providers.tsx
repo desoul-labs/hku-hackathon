@@ -13,14 +13,12 @@ type P = PropsWithChildren;
 
 export default function Providers({ children }: P) {
   return (
-    <>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <LensProvider config={lensConfig}>
-            <ReduxProvider>{children}</ReduxProvider>
-          </LensProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <LensProvider config={lensConfig}>
+          <ReduxProvider>{children}</ReduxProvider>
+        </LensProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }

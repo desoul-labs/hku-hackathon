@@ -6,6 +6,11 @@ export enum TAB {
   DISCOVERY,
 }
 
+export enum HASH {
+  FRIENDS = "#friends",
+  DISCOVERY = "#discovery",
+}
+
 type NavigationProps = {
   activeTab: TAB;
   onPressTab: (tab: TAB) => void;
@@ -29,7 +34,10 @@ export default function Navigation({ activeTab, onPressTab }: NavigationProps) {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <a
-                  onClick={() => onPressTab(TAB.FRIENDS)}
+                  onClick={() => {
+                    window.location.hash = HASH.FRIENDS;
+                    onPressTab(TAB.FRIENDS);
+                  }}
                   className={`${
                     activeTab === TAB.FRIENDS && "bg-gray-900"
                   } text-white rounded-md px-3 py-2 text-sm font-medium hover:cursor-pointer`}
@@ -39,7 +47,10 @@ export default function Navigation({ activeTab, onPressTab }: NavigationProps) {
                 </a>
 
                 <a
-                  onClick={() => onPressTab(TAB.DISCOVERY)}
+                  onClick={() => {
+                    window.location.hash = HASH.DISCOVERY;
+                    onPressTab(TAB.DISCOVERY);
+                  }}
                   className={`${
                     activeTab === TAB.DISCOVERY && "bg-gray-900"
                   } text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium hover:cursor-pointer`}
@@ -60,13 +71,13 @@ export default function Navigation({ activeTab, onPressTab }: NavigationProps) {
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   aria-hidden="true"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
                   />
                 </svg>
@@ -88,13 +99,13 @@ export default function Navigation({ activeTab, onPressTab }: NavigationProps) {
                 className="block h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 aria-hidden="true"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
               </svg>
@@ -110,6 +121,7 @@ export default function Navigation({ activeTab, onPressTab }: NavigationProps) {
         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
           <a
             onClick={() => {
+              window.location.hash = HASH.FRIENDS;
               onPressTab(TAB.FRIENDS);
               setIsTabMenuVisible(false);
             }}
@@ -122,6 +134,7 @@ export default function Navigation({ activeTab, onPressTab }: NavigationProps) {
           </a>
           <a
             onClick={() => {
+              window.location.hash = HASH.DISCOVERY;
               onPressTab(TAB.DISCOVERY);
               setIsTabMenuVisible(false);
             }}

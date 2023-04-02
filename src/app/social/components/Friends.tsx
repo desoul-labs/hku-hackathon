@@ -1,6 +1,7 @@
 import Loading from "@/components/Loading";
 import { lensClient } from "@/config/lens";
 import useFriends from "@/hooks/useFriends";
+import { useAppSelector } from "@/redux/store";
 import {
   PaginatedResult,
   PublicationFragment,
@@ -8,19 +9,15 @@ import {
 } from "@lens-protocol/client";
 import { PostFragment } from "@lens-protocol/react-web";
 import { useRouter } from "next/navigation";
-// import { useAccount } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
+import { useAccount } from "wagmi";
 import Feeds from "./Feeds";
-// import { useAppSelector } from "@/redux/store";
 
 export default function Friends() {
   const router = useRouter();
-  // const { address } = useAccount();
-  // const profileId = useAppSelector(state => state.auth.profileId);
-  // @Notes: test profile & address
-  const address = "0x072986abad0740f87DE6E287BD1bD077Ab0a084F";
-  const profileId = "0x0144a5";
+  const { address } = useAccount();
+  const profileId = useAppSelector((state) => state.auth.profileId);
   const { friends } = useFriends(profileId, address || "");
   const [publicationResult, setPublicationResult] =
     useState<PaginatedResult<PublicationFragment>>();
@@ -49,7 +46,7 @@ export default function Friends() {
         const result = await lensClient.publication.fetchAll({
           profileIds: friendProfileIds,
           publicationTypes: [PublicationTypes.Post],
-          limit: 50,
+          limit: 10,
         });
         setPublicationResult(result);
 
@@ -93,6 +90,7 @@ export default function Friends() {
                 loadMore={onLoadMore}
                 hasMore={!!publicationResult?.pageInfo.next}
                 loader={<Loading isCenter />}
+                useWindow={false}
               >
                 <Feeds posts={items as unknown as PostFragment[]} />
               </InfiniteScroll>
