@@ -1,7 +1,12 @@
-import { LensConfig, staging } from "@lens-protocol/react-web";
+import LensClient, { polygon } from "@lens-protocol/client";
+import { LensConfig, production } from "@lens-protocol/react-web";
 import { bindings } from "@lens-protocol/wagmi";
 
 export const lensConfig: LensConfig = {
   bindings: bindings(),
-  environment: staging,
+  environment: production,
 };
+
+export const lensClient = new LensClient({
+  environment: polygon,
+});
