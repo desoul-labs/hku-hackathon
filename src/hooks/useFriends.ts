@@ -25,8 +25,7 @@ export default function useFriends(profileId: string, walletAddress: string) {
         } catch (err) {}
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [followersResult.hasMore]);
+  }, [followersResult]);
 
   useEffect(() => {
     (async () => {
@@ -36,8 +35,7 @@ export default function useFriends(profileId: string, walletAddress: string) {
         } catch (err) {}
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [followingResult.hasMore]);
+  }, [followingResult]);
 
   const followers = useMemo(
     () =>
